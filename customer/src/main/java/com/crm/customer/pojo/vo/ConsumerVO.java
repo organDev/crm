@@ -8,6 +8,7 @@ package com.crm.customer.pojo.vo;
  * @copyright Copyright (c) 2018. （company）all rights reserved.
  */
 
+import com.crm.customer.pojo.dto.ConsumerDTO;
 import lombok.Data;
 
 /**
@@ -16,5 +17,5 @@ import lombok.Data;
  * @date 2019/1/21
  */
 @Data
-public class ConsumerVO {
+public class ConsumerVO extends ConsumerDTO {
 }

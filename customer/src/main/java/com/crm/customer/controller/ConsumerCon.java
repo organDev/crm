@@ -8,6 +8,7 @@ package com.crm.customer.controller;
  * @copyright Copyright (c) 2018. （company）all rights reserved.
  */
 
+import com.crm.customer.pojo.vo.ConsumerVO;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -16,7 +17,12 @@ import org.springframework.stereotype.Controller;
  * @date 2019/1/21
  */
 @Controller
-public interface ConsumerCon {
+public interface ConsumerCon<VO extends ConsumerVO> {
 
-//    int insert()
+    /**
+     * 新增用户
+     * @param consumerVO
+     * @return
+     */
+    int insert(VO consumerVO);
 }
