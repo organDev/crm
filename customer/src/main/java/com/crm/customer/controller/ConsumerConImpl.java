@@ -10,6 +10,7 @@ package com.crm.customer.controller;
 
 import com.crm.customer.pojo.vo.ConsumerVO;
 import com.crm.customer.service.ConsumerSer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("consumer")
+@Slf4j
 public class ConsumerConImpl implements ConsumerCon<ConsumerVO> {
     private final ConsumerSer consumerSer;
 
@@ -35,6 +37,7 @@ public class ConsumerConImpl implements ConsumerCon<ConsumerVO> {
 
     @GetMapping("/test")
     public String test(){
+        log.info( "test" );
         return "test";
     }
 }

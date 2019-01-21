@@ -1,0 +1,2 @@
+#!/bin/bash
+nohup java -Xms512M -Xmx512M -XX:+HeapDumpOnOutOfMemoryError -jar ./customer.jar --spring.profiles.active=prod  &
