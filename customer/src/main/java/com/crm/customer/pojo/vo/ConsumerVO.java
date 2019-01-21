@@ -1,4 +1,4 @@
-package com.crm.customer.config;
+package com.crm.customer.pojo.vo;
 /**
  * 公司名称
  * <p>
@@ -8,15 +8,13 @@ package com.crm.customer.config;
  * @copyright Copyright (c) 2018. （company）all rights reserved.
  */
 
-import com.crm.customer.CustomerApplication;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringBootConfiguration;
+import lombok.Data;
 
 /**
+ * 客户管理VO
  * @author maikec
- * @date 2019/1/18
+ * @date 2019/1/21
  */
-@SpringBootConfiguration
-@MapperScan(basePackages = "com.crm.customer.mapper")
-public class MybatisConfig {
+@Data
+public class ConsumerVO {
 }

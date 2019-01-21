@@ -3,6 +3,9 @@ package com.crm.customer.mapper;
 import com.crm.customer.pojo.dos.Consumer;
 import java.util.List;
 
+/**
+ * @author maikec
+ */
 public interface ConsumerMapper {
     int deleteByPrimaryKey(Integer id);
 
