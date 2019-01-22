@@ -8,6 +8,7 @@ package com.crm.customer.controller;
  * @copyright Copyright (c) 2018. （company）all rights reserved.
  */
 
+import cn.hutool.core.date.DateUtil;
 import com.crm.customer.pojo.vo.ConsumerVO;
 import com.crm.customer.service.ConsumerSer;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("consumer")
 @Slf4j
-public class ConsumerConImpl implements ConsumerCon<ConsumerVO> {
+public class ConsumerConImpl extends BaseCon implements ConsumerCon<ConsumerVO> {
     private final ConsumerSer consumerSer;
 
     public ConsumerConImpl(ConsumerSer consumerSer){
@@ -36,8 +37,34 @@ public class ConsumerConImpl implements ConsumerCon<ConsumerVO> {
     }
 
     @GetMapping("/test")
-    public String test(){
+    public Object test(){
         log.info( "test" );
-        return "test";
+        return success();
+    }
+
+    @GetMapping("/test1")
+    public Object test1(){
+        log.info( "test" );
+        return success("test success");
+    }
+
+    @GetMapping("/test2")
+    public Object test2(){
+        log.info( "test" );
+        ConsumerVO consumerVO = new ConsumerVO();
+        consumerVO.setName( "test" );
+        consumerVO.setId( 1 );
+        consumerVO.setCreateTime( DateUtil.date() );
+        return success(consumerVO);
+    }
+
+    @GetMapping("/error")
+    public Object test3(){
+        return error();
+    }
+
+    @GetMapping("/error1")
+    public Object test4(){
+        return error("test error");
     }
 }

@@ -8,3 +8,15 @@
 GET http://localhost:8088/consumer/test
 
 ###
+GET http://localhost:8088/consumer/test1
+
+###
+GET http://localhost:8088/consumer/test2
+
+###
+GET http://localhost:8088/consumer/error
+
+###
+GET http://localhost:8088/consumer/error1
+
+###

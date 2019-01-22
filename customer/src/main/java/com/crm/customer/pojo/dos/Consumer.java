@@ -2,8 +2,11 @@ package com.crm.customer.pojo.dos;
 
 import java.util.Date;
 
+/**
+ * @author maikec
+ */
 public class Consumer {
-    private Integer id;
+    protected Integer id;
 
     private Integer parentId;
 
