@@ -6,7 +6,7 @@ import java.util.Date;
  * @author maikec
  */
 public class Consumer {
-    protected Integer id;
+    private Integer id;
 
     private Integer parentId;
 
