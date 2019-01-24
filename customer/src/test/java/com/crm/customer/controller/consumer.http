@@ -20,3 +20,12 @@ GET http://localhost:8088/consumer/error
 GET http://localhost:8088/consumer/error1
 
 ###
+POST http://localhost:8088/consumer/login
+Content-Type: application/json
+
+{
+"id":1,
+"name":"maikec"
+}
+
+###

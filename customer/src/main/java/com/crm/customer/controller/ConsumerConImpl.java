@@ -12,10 +12,7 @@ import cn.hutool.core.date.DateUtil;
 import com.crm.customer.pojo.vo.ConsumerVO;
 import com.crm.customer.service.ConsumerSer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author maikec
@@ -66,5 +63,11 @@ public class ConsumerConImpl extends BaseCon implements ConsumerCon<ConsumerVO> 
     @GetMapping("/error1")
     public Object test4(){
         return error("test error");
+    }
+
+    @PostMapping("/login")
+    public Object login(@RequestBody ConsumerVO consumerVO){
+        log.info( consumerVO.toString() );
+        return success(  );
     }
 }
