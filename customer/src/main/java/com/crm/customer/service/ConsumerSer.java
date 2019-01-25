@@ -9,6 +9,7 @@ package com.crm.customer.service;
  */
 
 import com.crm.customer.pojo.dto.ConsumerDTO;
+import com.crm.customer.pojo.vo.ConsumerVO;
 import com.crm.customer.utils.exception.InsertException;
 
 /**
@@ -23,4 +24,11 @@ public interface ConsumerSer<DTO extends ConsumerDTO> {
      * @return
      */
     int insert(DTO consumerDTO) throws InsertException;
+
+    /**
+     * 登录
+     * @param consumerVO
+     * @return
+     */
+    ConsumerDTO login(ConsumerVO consumerVO);
 }

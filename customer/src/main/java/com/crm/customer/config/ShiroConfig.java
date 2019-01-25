@@ -8,16 +8,17 @@ package com.crm.customer.config;
  * @copyright Copyright (c) 2018. （company）all rights reserved.
  */
 
+import com.crm.customer.utils.shiro.BaseAuthenticateHepler;
 import com.crm.customer.utils.shiro.CustomerRealm;
-import com.crm.customer.utils.shiro.ShiroInterceptor;
+import com.crm.customer.utils.shiro.ShiroHelper;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Setter;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
@@ -38,14 +39,13 @@ public class ShiroConfig implements WebMvcConfigurer {
     private String username;
     @Setter
     private String password;
+    @Value( "${shiro.exclude-uri}" )
+    private String excludeUri;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor( shiroInterceptor() ).addPathPatterns( "/**" );
-    }
+
     @Bean
-    public ShiroInterceptor shiroInterceptor(){
-        return new ShiroInterceptor();
+    public BaseAuthenticateHepler authenticateHepler(){
+        return new ShiroHelper();
     }
 
     @Bean

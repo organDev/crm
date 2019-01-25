@@ -10,8 +10,13 @@ package com.crm.customer.service;
 
 import com.crm.customer.mapper.ConsumerMapper;
 import com.crm.customer.pojo.dto.ConsumerDTO;
+import com.crm.customer.pojo.vo.ConsumerVO;
+import com.crm.customer.utils.Res;
 import com.crm.customer.utils.exception.InsertException;
+import com.crm.customer.utils.shiro.BaseAuthenticateHepler;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author maikec
@@ -22,11 +27,24 @@ public class ConsumerSerImpl implements ConsumerSer<ConsumerDTO> {
 
     private final ConsumerMapper consumerMapper;
 
+    @Resource
+    private BaseAuthenticateHepler authenticateHepler;
+
     public ConsumerSerImpl(ConsumerMapper consumerMapper){
         this.consumerMapper = consumerMapper;
     }
     @Override
     public int insert(ConsumerDTO consumerDTO) throws InsertException {
         return consumerMapper.insert( consumerDTO );
+    }
+
+    @Override
+    public ConsumerDTO login(ConsumerVO consumerVO) {
+        ConsumerDTO consumerDTO = new ConsumerDTO();
+        Res res = authenticateHepler.sign(consumerVO.getName(),"123" );
+        consumerDTO.setCode( res.getCode() );
+        consumerDTO.setData( res.getData() );
+        consumerDTO.setMsg(res.getMsg());
+        return consumerDTO;
     }
 }

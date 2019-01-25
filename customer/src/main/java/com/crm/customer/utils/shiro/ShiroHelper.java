@@ -8,7 +8,9 @@ package com.crm.customer.utils.shiro;
  * @copyright Copyright (c) 2018. （company）all rights reserved.
  */
 
-import lombok.extern.slf4j.Slf4j;
+import com.crm.customer.utils.Res;
+import com.crm.customer.utils.ResponseConstant;
+import com.crm.customer.utils.jwt.JWTHepler;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -16,38 +18,39 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- * 认证权限管理拦截器
+ * shiro Helper
  * @author maikec
- * @date 2019/1/23
+ * @date 2019/1/25
  */
-@Slf4j
-public class ShiroInterceptor implements HandlerInterceptor {
+public final class ShiroHelper extends BaseAuthenticateHepler {
+
     @Autowired
     private SecurityManager securityManager;
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    protected Res authenticate(String username, String password) {
         SecurityUtils.setSecurityManager(securityManager );
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken("maikec","123456");
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
+
+        Res result = new Res();
         try {
             subject.login( usernamePasswordToken );
-            response.setHeader( "Access-Token", new Md5Hash(usernamePasswordToken).toHex());
+            result.setData( new Md5Hash(usernamePasswordToken).toHex() );
+            result.setCode( ResponseConstant.SUCCESS_CODE );
+            result.setMsg( ResponseConstant.SUCCESS_MSG );
         } catch (UnknownAccountException ex){
-            log.info( "用户不存在",ex );
-            return false;
+             result.setCode( ResponseConstant.SUCCESS_UNKNOWN_ACCOUNT_CODE );
+             result.setMsg( "用户不存在" );
+             result.setData( "" );
         }
-        return true;
+        return result;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+    protected String giveToken(String usernamePasswordToken) {
+        return JWTHepler.getToken( usernamePasswordToken );
     }
 }

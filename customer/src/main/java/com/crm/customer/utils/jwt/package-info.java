@@ -1,4 +1,3 @@
-package com.crm.customer.pojo.dto;
 /**
  * 公司名称
  * <p>
@@ -6,18 +5,13 @@ package com.crm.customer.pojo.dto;
  * 不得使用、复制、修改、合并、发布、分发和/或销售本源代码的副本。
  *
  * @copyright Copyright (c) 2018. （company）all rights reserved.
+ * @author maikec
+ * @date 2019/1/25
  */
-
-import com.crm.customer.pojo.dos.Consumer;
-import lombok.Data;
 
 /**
+ * JSON WEB Token
  * @author maikec
- * @date 2019/1/19
+ * @date 2019/1/25
  */
-@Data
-public class ConsumerDTO extends Consumer {
-    private Integer Code;
-    private String data;
-    private String msg;
-}
+package com.crm.customer.utils.jwt;

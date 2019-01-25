@@ -9,6 +9,7 @@ package com.crm.customer.controller;
  */
 
 import cn.hutool.core.date.DateUtil;
+import com.crm.customer.pojo.dto.ConsumerDTO;
 import com.crm.customer.pojo.vo.ConsumerVO;
 import com.crm.customer.service.ConsumerSer;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +68,7 @@ public class ConsumerConImpl extends BaseCon implements ConsumerCon<ConsumerVO> 
 
     @PostMapping("/login")
     public Object login(@RequestBody ConsumerVO consumerVO){
-        log.info( consumerVO.toString() );
-        return success(  );
+        ConsumerDTO consumerDTO = consumerSer.login(consumerVO);
+        return success( consumerDTO.getMsg(),consumerDTO.getData() );
     }
 }
