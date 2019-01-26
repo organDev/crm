@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Bean;
 public class CustomerConfig {
     @Bean
     public JWTHepler jwtHepler(@Value( "${jwt.secret}" ) String secret, @Value( "${jwt.iss}" ) String iss,
-                                @Value( "${jwt.exp}" ) Integer exp){
-        return new JWTHepler(secret, iss, exp );
+                                @Value( "${jwt.exp}" ) Integer exp, @Value( "${jwt.aud}" ) String aud){
+        return new JWTHepler(secret, iss, exp, aud);
     }
 }

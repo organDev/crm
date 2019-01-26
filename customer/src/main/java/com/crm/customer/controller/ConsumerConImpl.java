@@ -71,4 +71,9 @@ public class ConsumerConImpl extends BaseCon implements ConsumerCon<ConsumerVO> 
         ConsumerDTO consumerDTO = consumerSer.login(consumerVO);
         return success( consumerDTO.getMsg(),consumerDTO.getData() );
     }
+
+    @GetMapping("/getInfo")
+    public Object getInfo(@RequestBody ConsumerVO consumerVO){
+        return success();
+    }
 }

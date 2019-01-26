@@ -35,4 +35,5 @@ public class CustomerRealm extends JdbcRealm {
     public void setPermissionsQuery() {
         super.setPermissionsQuery( permissionsQuery );
     }
+
 }

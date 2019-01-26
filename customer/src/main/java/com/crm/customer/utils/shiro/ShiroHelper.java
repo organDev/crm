@@ -12,12 +12,15 @@ import com.crm.customer.utils.Res;
 import com.crm.customer.utils.ResponseConstant;
 import com.crm.customer.utils.jwt.JWTHepler;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * shiro Helper
@@ -26,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public final class ShiroHelper extends BaseAuthenticateHepler {
 
-    @Autowired
+    @Resource
     private SecurityManager securityManager;
 
     @Override
@@ -35,16 +38,20 @@ public final class ShiroHelper extends BaseAuthenticateHepler {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
 
-        Res result = new Res();
+        Res<String> result = new Res<>();
         try {
             subject.login( usernamePasswordToken );
-            result.setData( new Md5Hash(usernamePasswordToken).toHex() );
+            result.setData( new Md5Hash(usernamePasswordToken.toString()).toHex() );
             result.setCode( ResponseConstant.SUCCESS_CODE );
             result.setMsg( ResponseConstant.SUCCESS_MSG );
         } catch (UnknownAccountException ex){
-             result.setCode( ResponseConstant.SUCCESS_UNKNOWN_ACCOUNT_CODE );
-             result.setMsg( "用户不存在" );
+             result.setCode( ResponseConstant.ERROR_UNAUTHORIAED_CODE );
+             result.setMsg( ResponseConstant.SUCCESS_UNKNOWN_ACCOUNT_MSG );
              result.setData( "" );
+        } catch (IncorrectCredentialsException ex){
+            result.setCode( ResponseConstant.ERROR_UNAUTHORIAED_CODE );
+            result.setMsg(ResponseConstant.SUCCESS_PASSWORD_ERROE_MSG);
+            result.setData( "" );
         }
         return result;
     }
@@ -52,5 +59,9 @@ public final class ShiroHelper extends BaseAuthenticateHepler {
     @Override
     protected String giveToken(String usernamePasswordToken) {
         return JWTHepler.getToken( usernamePasswordToken );
+    }
+
+    public void verify(String authorization) throws ShiroException {
+        JWTHepler.verifyToken( authorization );
     }
 }

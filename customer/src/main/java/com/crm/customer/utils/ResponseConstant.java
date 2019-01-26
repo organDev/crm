@@ -18,8 +18,13 @@ public final class ResponseConstant {
     /**
      * 认证失败
      */
-    public static final Integer SUCCESS_UNAUTHORIAED_CODE = 10401;
+    public static final Integer ERROR_UNAUTHORIAED_CODE = 10401;
     public static final Integer ERROR_CODE = 20000;
     public static final String SUCCESS_MSG = "成功";
     public static final String ERROR_MSG = "失败";
+    public static final String SUCCESS_PASSWORD_ERROE_MSG = "密码错误";
+    public static final String SUCCESS_UNKNOWN_ACCOUNT_MSG = "用户不存在";
+    public static final Integer ERROR_EXPIRED_CODE = 10408;
+    public static final String ERROR_EXPIRED_MSG = "请求超时,请重新登录";
+    public static final String ERROR_UNAUTHORIAED_MSG = "未认证";
 }

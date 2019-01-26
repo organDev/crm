@@ -9,6 +9,7 @@ package com.crm.customer.utils.shiro;
  */
 
 import com.crm.customer.utils.Res;
+import com.crm.customer.utils.ResponseConstant;
 
 /**
  * 认证帮助类
@@ -25,7 +26,10 @@ public abstract class BaseAuthenticateHepler {
      */
     public Res sign(String username, String password){
         Res res = authenticate(username, password);
-        res.setData( giveToken(res.getData()));
+        if (ResponseConstant.SUCCESS_CODE.equals( res.getCode() )){
+            //认证成功则下发token
+            res.setData( giveToken(res.getData()));
+        }
         return res;
     }
 
