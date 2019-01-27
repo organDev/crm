@@ -27,4 +27,5 @@ public final class ResponseConstant {
     public static final Integer ERROR_EXPIRED_CODE = 10408;
     public static final String ERROR_EXPIRED_MSG = "请求超时,请重新登录";
     public static final String ERROR_UNAUTHORIAED_MSG = "未认证";
+    public static final String ERROR_UN_LOGGED_IN_MSG = "未登录";
 }

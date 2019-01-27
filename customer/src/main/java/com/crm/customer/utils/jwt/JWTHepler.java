@@ -68,7 +68,8 @@ public class JWTHepler {
      * 验证token
      * @param token
      */
-    public static void verifyToken(@NotBlank String token) throws JWTVerificationException{
+    public static void verifyToken(String token) throws JWTVerificationException{
+        Assert.notNull( token,"token is null" );
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)

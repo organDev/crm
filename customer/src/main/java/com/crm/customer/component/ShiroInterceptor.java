@@ -9,15 +9,13 @@ package com.crm.customer.component;
  */
 
 import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.extra.servlet.ServletUtil;
-import cn.hutool.http.ContentType;
-import cn.hutool.json.JSONUtil;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.crm.customer.utils.Res;
 import com.crm.customer.utils.ResponseConstant;
 import com.crm.customer.utils.shiro.ShiroHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
@@ -37,22 +35,35 @@ public class ShiroInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
-            shiroHelper.verify(request.getHeader( "Authorization" ));
-        } catch (Exception e){
-            Res res = new Res();
             response.setCharacterEncoding( CharsetUtil.UTF_8 );
-            if (e instanceof TokenExpiredException) {
-                res.setCode( ResponseConstant.ERROR_EXPIRED_CODE );
-                res.setMsg( ResponseConstant.ERROR_EXPIRED_MSG );
-            }else if (e instanceof JWTDecodeException){
-                res.setCode( ResponseConstant.ERROR_UNAUTHORIAED_CODE );
-                res.setMsg( ResponseConstant.ERROR_UNAUTHORIAED_MSG );
-            }
-            ServletUtil.write(response,
-                    JSONUtil.toJsonStr(res)
-                    ,ContentType.JSON.toString());
+            Assert.notNull( request.getHeader( "Authorization" ), "token is null" );
+            shiroHelper.verify(request.getHeader( "Authorization" ));
+        } catch (TokenExpiredException e) {
+            ResponseHepler.renderRes( response,
+                    fillRes(ResponseConstant.ERROR_EXPIRED_CODE, ResponseConstant.ERROR_EXPIRED_MSG) );
+            return false;
+        } catch (JWTDecodeException e){
+           ResponseHepler.renderRes( response,
+                   fillRes( ResponseConstant.ERROR_UNAUTHORIAED_CODE,ResponseConstant.ERROR_UNAUTHORIAED_MSG  ) );
+            return false;
+        } catch (IllegalArgumentException e){
+            ResponseHepler.renderRes( response,
+                    fillRes( ResponseConstant.ERROR_UNAUTHORIAED_CODE, ResponseConstant.ERROR_UN_LOGGED_IN_MSG ) );
             return false;
         }
         return true;
+    }
+
+    /**
+     * 填写响应体
+     * @param code
+     * @param msg
+     * @return
+     */
+    private Res fillRes(int code, String msg) {
+        Res res = new Res();
+        res.setCode( code );
+        res.setMsg( msg );
+        return res;
     }
 }
