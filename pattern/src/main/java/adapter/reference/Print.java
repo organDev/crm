@@ -1,4 +1,4 @@
-package adapter.extend;
+package adapter.reference;
 /**
  * 公司名称
  * <p>
@@ -9,22 +9,22 @@ package adapter.extend;
  */
 
 /**
+ * 需求
  * @author maikec
  * @date 2019/5/9
  */
-public class PrintBannerAdapter extends Banner implements Print {
+public abstract class Print {
+    /**
+     * 打印带括号的消息
+     */
+    public abstract void printParen();
 
-    public PrintBannerAdapter(String msg) {
-        super( msg );
-    }
+    /**
+     * 打印带*号的消息
+     */
+    public abstract void printAster();
 
-    @Override
-    public void printParen() {
-        showWithParen();
-    }
+    public void i(){
 
-    @Override
-    public void printAster() {
-        showWithAster();
     }
 }

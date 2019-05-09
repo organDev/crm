@@ -9,8 +9,19 @@ package adapter.extend;
  */
 
 /**
+ * 实际使用中的类
  * @author maikec
  * @date 2019/5/9
  */
 public class Banner {
+    private final String msg;
+    public Banner(String msg){
+        this.msg = msg;
+    }
+    public void showWithParen(){
+        System.out.println( "(" + msg + ")" );
+    }
+    public void showWithAster(){
+        System.out.println( "*" + msg + "*" );
+    }
 }

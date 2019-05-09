@@ -13,4 +13,9 @@ package adapter.extend;
  * @date 2019/5/9
  */
 public class AdapterExtendDemo {
+    public static void main(String[] args) {
+        Print print = new PrintBannerAdapter( "hello adapter" );
+        print.printAster(  );
+        print.printParen();
+    }
 }

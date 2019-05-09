@@ -1,4 +1,4 @@
-package adapter.extend;
+package adapter.reference;
 /**
  * 公司名称
  * <p>
@@ -12,19 +12,19 @@ package adapter.extend;
  * @author maikec
  * @date 2019/5/9
  */
-public class PrintBannerAdapter extends Banner implements Print {
+public class PrintBannerAdapter extends Print {
+    private Banner banner;
 
-    public PrintBannerAdapter(String msg) {
-        super( msg );
+    public PrintBannerAdapter(Banner banner){
+        this.banner = banner;
     }
-
     @Override
     public void printParen() {
-        showWithParen();
+        banner.showWithParen();
     }
 
     @Override
     public void printAster() {
-        showWithAster();
+        banner.showWithAster();
     }
 }

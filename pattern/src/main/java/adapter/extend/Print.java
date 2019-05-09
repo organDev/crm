@@ -9,8 +9,18 @@ package adapter.extend;
  */
 
 /**
+ * 需求
  * @author maikec
  * @date 2019/5/9
  */
 public interface Print {
+    /**
+     * 打印带括号的消息
+     */
+    void printParen();
+
+    /**
+     * 打印带*号的消息
+     */
+    void printAster();
 }
