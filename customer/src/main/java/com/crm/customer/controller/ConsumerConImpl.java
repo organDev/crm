@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("consumer")
 @Slf4j
-public class ConsumerConImpl extends BaseCon implements ConsumerCon<ConsumerVO> {
+public class
+
+ConsumerConImpl extends BaseCon implements ConsumerCon<ConsumerVO> {
     private final ConsumerSer consumerSer;
 
     public ConsumerConImpl(ConsumerSer consumerSer){

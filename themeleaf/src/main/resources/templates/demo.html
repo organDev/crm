@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+   <div>
+       <label th:text="#{name}"></label>
+       <i th:text="${demo.id}"></i>
+   </div>
+</body>
+<script>
+    $(function () {
+        var address=window.location.href;
+        var thisDLoc   =   document.location;
+        var hostport=document.location.host;
+        console.info(address+","+thisDLoc+","+hostport);
+    })
+</script>
+</html>

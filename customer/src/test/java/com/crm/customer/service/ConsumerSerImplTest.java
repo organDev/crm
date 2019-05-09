@@ -34,7 +34,7 @@ public class ConsumerSerImplTest {
     @Before
     public void init(){
         consumerDTO = new ConsumerDTO();
-        consumerDTO.setId( 1000 );
+        consumerDTO.setId( 1230 );
         consumerDTO.setName( "maikec" );
         consumerDTO.setParentId( 10001 );
         consumerDTO.setIdCard( "GZ10001" );
@@ -48,5 +48,10 @@ public class ConsumerSerImplTest {
     @Test
     public void insert() {
         Assert.assertEquals( 1,consumerSer.insert( consumerDTO ) );
+    }
+
+    @Test
+    public void test(){
+        consumerSer.test();
     }
 }

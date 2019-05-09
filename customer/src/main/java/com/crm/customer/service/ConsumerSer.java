@@ -31,4 +31,8 @@ public interface ConsumerSer<DTO extends ConsumerDTO> {
      * @return
      */
     ConsumerDTO login(ConsumerVO consumerVO);
+
+    default void test(){
+        System.out.println( "" );
+    };
 }
