@@ -1,4 +1,4 @@
-package templateMethod;
+package templatemethod;
 /**
  * 公司名称
  * <p>
